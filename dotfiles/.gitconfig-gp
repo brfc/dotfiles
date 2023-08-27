@@ -1,0 +1,7 @@
+[user]
+	email = renato.carvalho@gapfruit.com
+	name = Renato Carvalho
+[core]
+	editor = nvim
+[fetch]
+	prune = true

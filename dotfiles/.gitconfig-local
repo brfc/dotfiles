@@ -1,0 +1,5 @@
+[user]
+	email = br.fcarv@gapfruit.com
+	name = brfc
+[core]
+	editor = nvim
