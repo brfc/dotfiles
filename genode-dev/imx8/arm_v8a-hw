@@ -1,0 +1,35 @@
+#
+# This file defines all variables needed to build Genode components/run scripts
+#
+#
+
+export CCACHE=1
+
+export KERNEL=hw
+export BOARD=imx8mm_iot_gate
+
+# cross compiler to use (none for this platform)
+unset HOST_DEV_PREFIX
+
+export UPDATE_VERSIONS=1    # update package versioins
+export FORCE=1              # Replace existing archives with freshly created ones (extract).
+export REBUILD=             # Replace existing archives with freshly created ones (build).
+export PREPARE_PORTS=1      # Prepare missing ports automatically.
+unset  KEEP_BUILD_DIR       # Do not remove build directories of built binary packages.
+
+export VERSION_CMD='`echo -n \`date +%Y-%m-%dT%H%M\``'
+unset INCLUDE_BOARD_RUN_OPT
+unset  VERBOSE
+
+export TEP_RESET_TO_GENESIS=yes
+
+if [[ $BASH_SOURCE != "" ]]; then
+	source $(dirname $(realpath --no-symlinks ${BASH_SOURCE}))/../helpers
+else
+	source $(dirname $(realpath --no-symlinks ${0}))/../helpers
+fi
+
+try_alias_make arm_v8a
+
+
+# vim: ft=bash

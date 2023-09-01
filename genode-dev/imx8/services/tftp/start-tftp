@@ -1,0 +1,5 @@
+#!/bin/bash
+
+p=$(echo $(realpath --no-symlinks $(dirname ${0})))
+
+sudo dnsmasq --conf-file=$p/dnsmasq.conf -d

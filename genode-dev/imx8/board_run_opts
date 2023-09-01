@@ -1,0 +1,14 @@
+BOARD_RUN_OPT(imx8mm_iot_gate) := \
+	--include image/uboot \
+	--image-uboot-no-gzip
+
+BOARD_RUN_OPT(imx8mm_iot_gate) += \
+	--include load/tftp \
+	--load-tftp-base-dir $(SERVICES_DIR)/tftp/ \
+	--load-tftp-copy-files
+
+BOARD_RUN_OPT(imx8mm_iot_gate) += \
+	--include log/serial \
+	--log-serial-cmd "sudo picocom -b 115200 $(SERIAL_TTY)"
+
+BOARD_RUN_OPT(imx8mm_iot_gate) += --host-addr $(GP_TARGET_IP)

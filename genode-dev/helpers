@@ -1,0 +1,21 @@
+try_alias_make () {
+	if [[ -d $GENODE_DIR/build ]]; then
+		GENODE_BUILD_DIR=`realpath --no-symlinks $GENODE_DIR/build/${1}`
+		alias make='make -C ${GENODE_BUILD_DIR}'
+		echo ">>> alias make to 'make -C ${GENODE_BUILD_DIR}'"
+	else
+		e=$(alias | grep 'make -C')
+		if [ "${e}" != '' ]; then
+			unalias make
+		fi
+	fi
+}
+
+shell=$(tr -d '\0' < /proc/$$/cmdline)
+if [[ ${shell} = 'bash' ]]; then
+	export -f try_alias_make
+else
+	export try_alias_make
+fi
+
+# vim: ft=bash

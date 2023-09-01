@@ -1,0 +1,6 @@
+d=$(echo ${GENODE_DEV_DIR}/imx8)
+source $(echo ${d}/arm_v8a-hw)
+
+export INCLUDE_BOARD_RUN_OPT=$d/board_run_opts
+
+# vim: ft=bash

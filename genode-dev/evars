@@ -1,0 +1,9 @@
+export GENODE_DIR=~/gp/genode
+export DEPOT_USER=brenato
+export NET_DEV=wlp0s20f3
+export SERVICES_NET_DEV=wlp0s20f3
+export SERVICES_DIR=/home/brfc/.services
+export SERIAL_TTY=/dev/ttyUSB0
+export GP_TARGET_IP=172.16.128.32
+
+# vim: ft=sh

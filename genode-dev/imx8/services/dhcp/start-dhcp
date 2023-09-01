@@ -1,0 +1,29 @@
+#!/bin/bash
+
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+# left-usb3-lenovo
+DOWNLINK="enx00e04c680b66"
+UPLINK="wlp0s20f3"
+
+
+# setup downlink address
+sudo ip link set $DOWNLINK up
+sudo ip addr add 192.168.2.3/24 dev $DOWNLINK
+sudo sysctl -w net.ipv4.ip_forward=1
+
+
+#iptables rules
+sudo iptables -D INPUT -i $DOWNLINK -j ACCEPT
+sudo iptables -I INPUT -i $DOWNLINK -j ACCEPT
+
+sudo iptables -D FORWARD -o $UPLINK -s 192.168.0.0/16 -j ACCEPT
+sudo iptables -I FORWARD -o $UPLINK -s 192.168.0.0/16 -j ACCEPT
+
+sudo iptables -t nat -D POSTROUTING -o $UPLINK  -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o $UPLINK  -j MASQUERADE
+
+# start dhcp service with dhcpd configuration
+sudo systemctl stop isc-dhcp-server.service
+sudo cp $SCRIPTPATH/dhcpd.conf /etc/dhcp/dhcpd.conf
+sudo systemctl start isc-dhcp-server.service
